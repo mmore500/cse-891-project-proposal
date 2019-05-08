@@ -1,0 +1,118 @@
+%\title{Cdiscount Project Proposal}
+\documentclass[10pt,twocolumn,letterpaper]{article}
+
+\usepackage{cvpr}
+\usepackage{times}
+\usepackage{epsfig}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+% Include other packages here, before hyperref.
+
+% If you comment hyperref and then uncomment it, you should delete
+% egpaper.aux before re-running latex.  (Or just hit 'q' on the first latex
+% run, let it finish, and you should be clear).
+\usepackage[pagebackref=true,breaklinks=true,letterpaper=true,colorlinks,bookmarks=false]{hyperref}
+
+\cvprfinalcopy % *** Uncomment this line for the final submission
+
+\def\cvprPaperID{****} % *** Enter the CVPR Paper ID here
+\def\httilde{\mbox{\tt\raisebox{-.5ex}{\symbol{126}}}}
+
+% Pages are numbered in submission mode, and unnumbered in camera-ready
+\ifcvprfinal\pagestyle{empty}\fi
+\begin{document}
+
+%%%%%%%%% TITLE
+\title{Cdiscount Image Categorization}
+
+\author{Steven Jorgensen\\
+Michigan State University \\
+{\tt\small jorgen72@mu.edu}
+% For a paper whose authors are all at the same institution,
+% omit the following lines up until the closing ``}''.
+% Additional authors and addresses can be added with ``\and'',
+% just like the second author.
+% To save space, use either the email address or home page, not both
+\and
+Matthew Andres Moreno\\
+Michigan State University\\
+{\tt\small mmore500@msu.edu}
+\and
+Ian Whalen\\
+Michigan State University \\
+{\tt\small whalenia@msu.edu}
+}
+
+
+\maketitle
+%\thispagestyle{empty}
+
+%%%%%%%%% ABSTRACT
+\begin{abstract}
+Online European retailer Cdiscount maintains an online catalog of 30 million products.
+Cdiscount could achieve greater efficiency in managing its catalog of products by automating the product classificiation process. 
+Cdiscount organizes its products into more than 5,000 categories, posing an extreme multi-category classification scheme problem.
+We aim to develop an approach that leverages data made available by the retailer to allow for accurate, automated cataloging of products based on their images.
+We will use existing convolutional neural network techniques (CNN) to classify images while exploiting the hierarchical nature of the Cdiscount categorization scheme to reduce the complexity of the problem.
+\end{abstract}
+
+%%%%%%%%% BODY TEXT
+\section{Problem Description}
+
+Cdiscount is one of France's largest e-commerce companies, selling large items such as trampolines, to small items like Tvs.
+As the company grows, so to does the number of different products they offer.
+In the past 2 years alone, they have added over 20 million new products to their wares.\cite{cDiscountKaggle} 
+Ensuring that each and every product is classified correctly is a challenging task.
+Currently, Cdiscount uses machine learning text classification methods to categorize their wares.
+To improve the accuracy of their classification methods, they would like to begin using images, rather than text, to categorize products.
+The data set provided has over 15 million images ranging over 5,000 categories, and each image has 3 different levels of categorization, making this a challenging multi-classification problem.
+
+\section{Proposed Approach}
+
+Our approach will be based on standard convolutional neural network techniques used perform multiclass image categorization \cite{Krizhevsky2012}.
+Exploiting the hierarchical nature of Cdiscount's classification scheme will be key to achieving good performance despite the large number of categories \cite{deng2010does}.
+We will try several approaches to exploit the hierarchical nature of the category scheme employed by Cdiscount.
+We will test nested image classification models, where separate networks are trained to sort images between categories at each hierarchical level.
+We will also test schemes that less severely penalize misclassification of an image to a category closely related to it in the product categorization hierarchy and schemes that are trained to perform categorization on all three levels of hierarchy simultaneously.
+
+We will use the TensorFlow framework to implement our models.
+
+\section{Data}
+
+Cdiscount has made an extensive dataset available through the data science platform Kaggle.
+This dataset includes the full hierarchical categorization scheme used by Cdiscount and a listing of over 9 million products.
+Each product has a unique ID, the ID of the category it falls in, and one to four images of that product.
+The dataset comes divided into training and testing datasets, with the training set describing approximately 7 million products and the testing set describing approximately 2 million products.
+
+\section{Division of Labor}
+
+Ian will lead laying out and implementing the network architecture.
+Steven will focus on organizing our data for use in training and assessing our model's performance with validation data.
+Matthew will design and implement the training technique and coordinate training using high performance computing assets.
+
+We will meet at least weekly to discuss and assess progress and work on the project together.
+
+
+\section{Milestones}
+
+
+\textit{Midterm report --- November 12, 2017}
+
+By the midterm report we will have a fully implemented solution for high level classifications and will assess the performance of our model on high level classification.
+By this time, we will also have a set of candidate strategies for performing lower level classifications to evaluate.\\
+
+
+\textit{Final report --- December 13, 2017}
+
+When we reach the final report, we hope to have a fully implemented model to organize products at all three levels of categorization.
+We will use cross validation assess and report the performance of our model on image classification at all hierarchical levels.
+
+
+{\small
+\bibliographystyle{ieee}
+\bibliography{egbib}
+}
+
+\end{document}
